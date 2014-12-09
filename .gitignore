@@ -54,7 +54,3 @@ docs/_build/
 # PyCharm Stuff
 .idea/
 
-# Data directory
-data
-
-
