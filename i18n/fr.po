@@ -1,13 +1,13 @@
-# Translation of OpenERP Server.
+# Translation of Odoo Server.
 # This file contains the translation of the following modules:
 #	* website_house_booking
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: OpenERP Server 8.0alpha1\n"
+"Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-07 13:53+0000\n"
-"PO-Revision-Date: 2014-05-07 13:53+0000\n"
+"POT-Creation-Date: 2014-12-09 16:24+0000\n"
+"PO-Revision-Date: 2014-12-09 16:24+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,22 +16,29 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: website_house_booking
-#: view:False:0
+#: view:website:website_house_booking.booking_changedate
+#: view:website:website_house_booking.booking_thanks
+msgid "&times;"
+msgstr "&times;"
+
+#. module: website_house_booking
+#: view:website:website_house_booking.booking_form
 msgid "Address"
 msgstr "Adresse"
 
 #. module: website_house_booking
-#: view:False:0
+#: view:website:website_house_booking.booking_changedate
 msgid "Arrival date"
 msgstr "Date d'arrivée"
 
 #. module: website_house_booking
-#: view:False:0
+#: view:website:website_house_booking.booking_changedate
+#: view:website:website_house_booking.booking_form
 msgid "Book"
 msgstr "Réserver"
 
 #. module: website_house_booking
-#: view:False:0
+#: view:website:website_house_booking.booking_form
 msgid "Book your villa"
 msgstr "Réservez votre villa"
 
@@ -41,64 +48,64 @@ msgid "Booking"
 msgstr "Réservation"
 
 #. module: website_house_booking
-#: view:False:0
+#: view:website:website_house_booking.booking_form
 msgid "City"
 msgstr "Ville"
 
 #. module: website_house_booking
-#: view:False:0
+#: view:website:website_house_booking.booking_form
 msgid "Click one time on the calendar to choose your arrival date and a second time to choose your departure date."
-msgstr "Cliquez une première fois pour choisir votre date d'arrivée et une seconde fois pour votre date de départ."
+msgstr "Cliquez une première fois pour choisir votre date d'arrivée et une seconde fois pour choisir votre date de départ."
 
 #. module: website_house_booking
-#: view:False:0
+#: view:website:website_house_booking.booking_form
 msgid "Company"
-msgstr "Société"
+msgstr "Entreprise"
 
 #. module: website_house_booking
-#: view:False:0
+#: view:website:website_house_booking.booking_changedate
 msgid "Departure date"
 msgstr "Date de départ"
 
 #. module: website_house_booking
-#: view:False:0
+#: view:website:website_house_booking.booking_form
 msgid "E-mail"
-msgstr "Courriel"
+msgstr "E-mail"
 
 #. module: website_house_booking
-#: view:False:0
+#: view:website:website_house_booking.booking_form
 msgid "Number of persons"
-msgstr "Nombre de personnes"
+msgstr "Nombre de personne"
 
 #. module: website_house_booking
-#: view:False:0
+#: view:website:website_house_booking.booking_form
 msgid "Phone number"
-msgstr "Numéro de téléphone"
+msgstr "Téléphone"
 
 #. module: website_house_booking
-#: view:False:0
+#: view:website:website_house_booking.booking_form
 msgid "Pick your reservation dates"
-msgstr "Pick your reservation dates"
+msgstr "Choisissez vos dates de réservation"
 
 #. module: website_house_booking
-#: view:False:0
+#: view:website:website_house_booking.booking_changedate
 msgid "Please check our reservation calendar and pick another dates :"
-msgstr "Merci de vérifier notre calendrier de réservation et de choisir des dates libres :"
+msgstr "Merci de changer vos dates de réservations à l'aide du calendrier :"
 
 #. module: website_house_booking
-#: view:False:0
+#: view:website:website_house_booking.booking_form
 msgid "Reset"
 msgstr "Réinitialiser"
 
 #. module: website_house_booking
-#: view:False:0
-msgid "Thank you !"
+#: view:website:website_house_booking.booking_thanks
+msgid "Thank you!"
 msgstr "Merci !"
 
 #. module: website_house_booking
-#: view:False:0
+#: view:website:website_house_booking.booking_changedate
 msgid "The villa is not available for the selected dates"
-msgstr "La villa n'est pas disponible pour les dates sélectionnées"
+msgstr "La villa n'est pas disponible aux dates selectionnées"
 
 #. module: website_house_booking
 #: model:ir.actions.act_url,name:website_house_booking.action_open_website
@@ -106,32 +113,31 @@ msgid "Website Reservation Form"
 msgstr "Formumaire de réservation pour le web site"
 
 #. module: website_house_booking
-#: view:False:0
+#: view:website:website_house_booking.booking_thanks
 msgid "You will receive an confirmation email soon."
-msgstr "Vous recevrez un courriel de confirmation très prochainement."
+msgstr "Vous allez recevoir un e-mail de confirmation sous peu."
 
 #. module: website_house_booking
-#: view:False:0
-msgid "Your booking application has been sent !"
-msgstr "Votre demande de réservation a été enregistrée !"
+#: view:website:website_house_booking.booking_thanks
+msgid "Your booking application has been sent!"
+msgstr "Votre réservation a été envoyé !"
 
 #. module: website_house_booking
-#: view:False:0
+#: view:website:website_house_booking.booking_form
 msgid "Your name"
 msgstr "Votre nom"
 
 #. module: website_house_booking
-#: view:False:0
+#: view:website:website_house_booking.booking_form
 msgid "Your reservation"
-msgstr "Votre reservation"
+msgstr "Votre réservation"
 
 #. module: website_house_booking
-#: view:False:0
+#: view:website:website_house_booking.booking_form
 msgid "Zip code"
 msgstr "Code postal"
 
 #. module: website_house_booking
-#: view:False:0
+#: view:website:website_house_booking.booking_form
 msgid "mobile phone recommended"
-msgstr "téléphone mobile de préférence"
-
+msgstr "numéro de téléphone mobile recommandé"
