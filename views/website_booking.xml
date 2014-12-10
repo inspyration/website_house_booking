@@ -2,14 +2,19 @@
 <openerp>
 <data>
 
+    <template id="assets_frontend" inherit_id="website.assets_frontend" name="House Booking additional assets">
+        <xpath expr="." position="inside">
+            <link rel='stylesheet' href='/website_house_booking/static/src/css/calendar-widget.min.css'/>
+            <script t-if="not editable" type="text/javascript" src="/web/static/lib/jquery.ui/js/jquery-ui-1.9.1.custom.js"></script>
+            <script type="text/javascript" src="/website_house_booking/static/src/js/backbone-min.js"></script>
+            <script type="text/javascript" src="/website_house_booking/static/src/js/calendar-widget.js"></script>
+        </xpath>
+    </template>
+
     <template id="booking_form" name="Booking form" page="True">
 
         <t t-call="website.layout">
             <t t-set="head">
-                <link rel='stylesheet' href='/website_house_booking/static/src/css/calendar-widget.min.css'/>
-                <script t-if="not editable" type="text/javascript" src="/web/static/lib/jquery.ui/js/jquery-ui-1.9.1.custom.js"></script>
-                <script type="text/javascript" src="/website_house_booking/static/src/js/backbone-min.js"></script>
-                <script type="text/javascript" src="/website_house_booking/static/src/js/calendar-widget.js"></script>
                 <script type="text/javascript">
                     $( document ).ready(function() {
                         function pickDateStart(element, startDate) {
@@ -288,10 +293,6 @@
     <template id="booking_changedate" name="Booking form - Change of date">
         <t t-call="website.layout">
             <t t-set="head">
-                <link rel='stylesheet' href='/website_house_booking/static/src/css/calendar-widget.min.css'/>
-                <script t-if="not editable" type="text/javascript" src="/web/static/lib/jquery.ui/js/jquery-ui-1.9.1.custom.js"></script>
-                <script type="text/javascript" src="/website_house_booking/static/src/js/backbone-min.js"></script>
-                <script type="text/javascript" src="/website_house_booking/static/src/js/calendar-widget.min.js"></script>
                 <script type="text/javascript">
                     $( document ).ready(function() {
                         $('.calendar').calendar({
