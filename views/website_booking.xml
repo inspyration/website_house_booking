@@ -2,6 +2,17 @@
 <openerp>
 <data>
 
+
+    <template id="contactus" inherit_id="website.contactus" name="Contact us">
+        <xpath expr="//div[@class='col-md-4 mb32']" position="replace">
+            <div class="col-md-4 mb32">
+                <img class="img img-responsive shadow mb16" src="/website/static/src/img/image_text.jpg"/>
+                <img class="img img-responsive shadow mb16" src="/website/static/src/img/image_text.jpg"/>
+            </div>
+        </xpath>
+    </template>
+
+
     <template id="assets_frontend" inherit_id="website.assets_frontend" name="House Booking additional assets">
         <xpath expr="." position="inside">
             <link rel='stylesheet' href='/website_house_booking/static/src/css/calendar-widget.min.css'/>
