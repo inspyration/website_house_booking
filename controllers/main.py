@@ -6,16 +6,13 @@ from openerp import SUPERUSER_ID
 
 from datetime import date, timedelta
 
-import logging
-_logger = logging.getLogger('INSPY_booking')
-
 
 def str2date(s):
     return date(*map(int, s.split('-')))
 
+
 def date2str(d):
     return str(d)[:10]
-
 
 
 def check_dates(values):
@@ -34,7 +31,6 @@ def check_dates(values):
 
 def inject_calendar_values(values, booking_model, nb_month=3, context=None):
     # Adapt for 1-month calendar or 3-month calendar
-    _logger.debug("inject_calendar_values %s %s %s" % (values, booking_model, nb_month))
 
     if context is None:
         context = {}
@@ -54,7 +50,9 @@ def inject_calendar_values(values, booking_model, nb_month=3, context=None):
         start_day = values["arrival_day"]
     # Get start day for the calendar
     values["today"] = str(date(*map(int, start_day.split("-"))))
-    values["start_day"] = start_day = str(date(*map(int, start_day.split("-"))) + timedelta(days=delta_start))[:8] + "01"
+    values["start_day"] = start_day =\
+        str(date(*map(int, start_day.split("-")))
+            + timedelta(days=delta_start))[:8] + "01"
     # Add it to the domain
     domain = [("departure_day", ">", start_day)]
 
@@ -62,17 +60,19 @@ def inject_calendar_values(values, booking_model, nb_month=3, context=None):
     # if so, we look oll future reservations.
     if values.get("departure_day") is not None:
         # Get stop day for the calendar : add two month, get the first day
-        stop_day = str(date(*map(int, values['departure_day'].split('-'))) + timedelta(days=delta_stop))[:8] + "01"
+        stop_day = str(date(*map(int, values['departure_day'].split('-'))) +
+                       timedelta(days=delta_stop))[:8] + "01"
         # back one day
-        stop_day = str(date(*map(int, stop_day.split('-'))) + timedelta(days=-1))[:10]
+        stop_day = str(date(*map(int, stop_day.split('-')))
+                       + timedelta(days=-1))[:10]
         domain .append(('arrival_day', '<', stop_day))
 
     # Get all bookings related to these dates
     booking_ids = booking_model.search(
-    request.cr,
-    SUPERUSER_ID,
-    domain,
-    context=request.context)
+        request.cr,
+        SUPERUSER_ID,
+        domain,
+        context=request.context)
 
     # Read those records
     values['reservations'] = booking_model.read(
@@ -83,11 +83,9 @@ def inject_calendar_values(values, booking_model, nb_month=3, context=None):
         context=request.context)
     days = []
     for r in values['reservations']:
-        _logger.debug("Reservation loop %s %s %s" % (r['id'],r['arrival_day'], r['departure_day']))
         start, stop = map(str2date, (r['arrival_day'], r['departure_day']))
         current_id = r['id']
         while start < stop:
-            _logger.debug("New day found %s" % (start))
             days.append((date2str(start), current_id))
             start += timedelta(days=1)
     values['reservedays'] = days
@@ -107,9 +105,8 @@ class booking(http.Controller):
     def booking(
         self, name=None, company=None, arrival_day=None, departure_day=None,
         persons_number=None, street=None, street2=None, zipcode=None, city=None,
-        phone=None, email=None):
-
-        _logger.debug(">>> context %s" % str(request.context))
+        phone=None, email=None
+    ):
 
         # Useful Models
         partner_model = request.registry['res.partner']
@@ -123,15 +120,26 @@ class booking(http.Controller):
         values, error = check_dates(values)
 
         # Mandatory fields set:
-        required_fields = ['name', 'arrival_day', 'departure_day', 'persons_number', 'phone', 'email', 'street', 'zipcode', 'city']
+        required_fields = ['name',
+                           'arrival_day',
+                           'departure_day',
+                           'persons_number',
+                           'phone',
+                           'email',
+                           'street',
+                           'zipcode',
+                           'city',
+                           ]
 
         # Check mandatory fields
         for field in required_fields:
             if not values.get(field):
                 error.add(field)
         if error:
-            values = inject_calendar_values(values, booking_model, nb_month=1, context=request.context)
-            return request.website.render("website_house_booking.booking_form", values)
+            values = inject_calendar_values(
+                values, booking_model, nb_month=1, context=request.context)
+            return request.website.render(
+                "website_house_booking.booking_form", values)
 
         # Initialize mappings
         post_partner = {}
@@ -139,16 +147,18 @@ class booking(http.Controller):
         post_company = {}
 
         # Partner stuff
+        post_partner["lang"] = request.context.get("lang", "fr_FR")
         post_partner['name'] = name
         post_partner['phone'] = phone
         post_partner['email'] = email
-        post_partner['user_id'] = False # Salesman field (vendeur) is empty
+        post_partner['user_id'] = False  # Salesman field is empty
         # Booking stuff
         post_booking['arrival_day'] = arrival_day
         post_booking['departure_day'] = departure_day
         post_booking['persons_number'] = persons_number
 
-        if company: # If partner is a company, address is related to the company
+        # If partner is a company, address is related to the company
+        if company:
             # Company stuff
             post_company['name'] = company
             post_company['street'] = street
@@ -183,14 +193,14 @@ class booking(http.Controller):
             [('email', '=', post_partner['email'])],
             context=request.context)
 
-        if partner_search: # If the partner already exists, we update new datas
+        if partner_search:  # If the partner already exists, we update new data
             post_booking['partner_id'] = partner_search[0]
             partner_model.write(
                 request.cr,
                 SUPERUSER_ID,
                 partner_search,
                 post_partner)
-        else: # Otherwise, a new partner is created
+        else:  # Otherwise, a new partner is created
             post_booking['partner_id'] = partner_model.create(
                 request.cr,
                 SUPERUSER_ID,
@@ -203,7 +213,8 @@ class booking(http.Controller):
             SUPERUSER_ID,
             arrival_day,
             departure_day,
-            context=request.context):
+            context=request.context
+        ):
 
             # We book
             booking_model.create(
@@ -239,11 +250,11 @@ class booking(http.Controller):
         booking_model = request.registry['house_booking.booking']
 
         mandatory_keys = (
-            "name",#?
-            "persons_number",#?
+            "name",
+            "persons_number",
             "arrival_day",
             "departure_day",
-            "partner_id",#?
+            "partner_id",
             )
 
         # Check mandatory keys (hidden fields)
@@ -252,28 +263,31 @@ class booking(http.Controller):
                 error.add(key)
 
         if error:
-            _logger.debug("Change Dates, Errors found %s (%s)" % (str(error), str(values),))
-            values = inject_calendar_values(values, booking_model, context=request.context)
+            values = inject_calendar_values(
+                values, booking_model, context=request.context)
             values['error'] = error
-            return request.website.render("website_house_booking.booking_changedate", values)
+            return request.website.render(
+                "website_house_booking.booking_changedate", values)
 
         if not booking_model.check_availability(
             request.cr,
             SUPERUSER_ID,
             values['arrival_day'],
             values['departure_day'],
-            context=request.context):
+            context=request.context
+        ):
 
-            _logger.debug("Change Dates, Not available (%s)" % (str(values),))
-            values = inject_calendar_values(values, booking_model, context=request.context)
-            return request.website.render("website_house_booking.booking_changedate", values)
+            values = inject_calendar_values(
+                values, booking_model, context=request.context)
+            return request.website.render(
+                "website_house_booking.booking_changedate", values)
 
-        _logger.debug("Dates, OK, création %s" % (str(values),))
         # We book
         booking_model.create(
             request.cr,
             SUPERUSER_ID,
             values,
             context=request.context)
-        return request.website.render("website_house_booking.booking_thanks", values)
+        return request.website.render(
+            "website_house_booking.booking_thanks", values)
 
