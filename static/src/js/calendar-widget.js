@@ -488,12 +488,12 @@
             },
 
             validateDates: function(dates) {
-                var sDate = new Date(dates.start);
+                var d = new Date(dates.start);
                 var eDate = new Date(dates.end);
-                var d = new Date();
-                d.setDate(sDate.getDate() + 1);
+                var defaultCalendar = _.keys(this.get("defaultCalendar"))
+
                 for (; eDate > d; d.setDate(d.getDate() + 1)) {
-                    if (_.keys(this.get("defaultCalendar")).indexOf($.datepicker.formatDate('yy-mm-dd', d)) != -1) {
+                    if (defaultCalendar.indexOf($.datepicker.formatDate('yy-mm-dd', d)) != -1) {
                         $('.calendar').data().validation = false;
                         return;
                     }
