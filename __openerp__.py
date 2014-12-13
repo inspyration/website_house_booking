@@ -2,7 +2,7 @@
     'name': 'Online booking form',
     'category': 'Website',
     'summary': 'Allow your customers to book online from your website.',
-    'version': '1.0',
+    'version': '1.2',
     'description': """
         Online booking form that create a partner and a booking.
         """,
@@ -13,11 +13,10 @@
         'views/website_booking.xml',
     ],
     'demo': [],
-    'js': [],#'static/src/js/backbone-min.js'],
+    'js': [],
     'qweb': [],
     'css': [],
     'installable': True,
     'auto_install': False,
-#    'application': True,
 }
 
